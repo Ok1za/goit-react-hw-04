@@ -1,14 +1,18 @@
-const ImageGallery = ({ items }) => {
+import ImageCard from '../ImageCard/ImageCard';
+import css from './ImageGallery.module.css';
+
+const ImageGallery = ({ images, onImageClick }) => {
     return (
-        <ul>
-            {items.map((item, index) => (
-            <li key={index}>
-                <div>
-                    <img src={item.urls.small} alt={item.alt_description} />
-                </div>
-            </li>
-            ))}
-        </ul>
+        <div>
+            <ul className={css.gallery}>
+                {Array.isArray(images) &&
+                images.map((image) => (
+                    <li key={image.id}>
+                        <ImageCard image={image} onClick={() => onImageClick(image)} />
+                    </li>
+                ))}
+            </ul>
+        </div>
     )
 }
 

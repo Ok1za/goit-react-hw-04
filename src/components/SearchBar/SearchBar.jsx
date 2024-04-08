@@ -1,20 +1,21 @@
 import toast from 'react-hot-toast';
+import css from './SearchBar.module.css';
 
 const SearchBar = ({ onSearch }) => {
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (e.target.elements.query.value.trim() === "") {
-      toast.error('This is an error!');
+    const query = e.target.elements.query.value.trim();
+    if (query === '') {
+      toast.error('Please enter a search query.');
       return;
     }
-
-    onSearch(e.target.elements.query.value);
+    onSearch(query);
     e.target.reset();
   };
 
   return (
-    <header>
-      <form onSubmit={handleSubmit}>
+    <header className={css.searchbar}>
+      <form className={css.searchForm} onSubmit={handleSubmit}>
         <input
           type="text"
           name="query"
@@ -22,7 +23,7 @@ const SearchBar = ({ onSearch }) => {
           autoFocus
           placeholder="Search images and photos"
         />
-        <button type="submit">Search</button>
+        <button className={css.button} type="submit">Search</button>
       </form>
     </header>
   );
